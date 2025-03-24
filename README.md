@@ -48,7 +48,7 @@ loadGFont("Montserrat");
 
 // single family with specific axis
 loadGFont({
-  family: "Some Axis Font",
+  family: "Some Font With Axis",
   axis: {
     // ital?: Italic, e.g. 0, 1, "0;1" etc.
     // wdth?: Width, e.g. 75, "69;100", "62.5..80" etc.
@@ -62,7 +62,7 @@ loadGFont([...]); // same format as above (mixable) in array
 
 // only for specific characters
 loadGFont(..., opt: {
-  text: "Hello World!" // space etc. will auto become i.e. %20
+  text: "Hello World!" // spaces etc. will auto become i.e. %20
 });
 
 // use load strategy other than "swap"
@@ -87,8 +87,7 @@ CJS + ESM builds etc. into account)
 ### End
 
 TLDR, this package provides more flexibility and guarantee for Google Fonts
-loading, and is most suitable for package developers who want to insert Shadow
-DOMs into others' pages.
+loading, and is most suitable for package developers.
 
 ---
 
