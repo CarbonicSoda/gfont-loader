@@ -21,7 +21,7 @@ pnpm add gfont-loader
 yarn add gfont-loader
 ```
 
-Now to load fonts, call `loadGFont`:
+To load fonts, call `loadGFont()`:
 
 ```ts
 // demo.ts
@@ -38,6 +38,8 @@ loadGFont(...);
 > reject with a string message respectively.
 
 The function supports multiple formats:
+
+> All which have good TypeScript typing support.
 
 ```ts
 // load-fonts.ts
@@ -56,12 +58,12 @@ loadGFont({
   },
 });
 
-// multiple families
+// load multiple families
 loadGFont([...]); // same format as above (mixable) in array
 
 // only for specific characters
 loadGFont(..., opt: {
-  text: "Hello World!" // spaces etc. will auto become i.e. %20
+  text: "Hello World!" // spaces etc. will be encoded automatically i.e. %20
 });
 
 // use load strategy other than "swap"
@@ -73,8 +75,10 @@ loadGFont(..., opt: {
 ### FAQ
 
 **Q**: Why not just use CSS @import etc. directly?  
-**A**: This is for packages that want to insert a Shadow DOM into someone else's
-pages etc.
+**A**: This is for package developers that want to load fonts via J/TS, e.g. for
+a Shadow DOM injected into someone else's pages etc.  
+Also, this package utilizes preload to speed up loading and saves your work,
+whilst providing enhanced flexibility and control.
 
 **Q**: Why not just use the official _webfontloader_?  
 **A**: Sir, that's from 8 years ago and hella obsolete. It is also way larger
@@ -83,10 +87,10 @@ Fonts.
 (13kB vs 0.8kB for the CJS build, npm shows 6+kB for gfont-loader took README,
 CJS + ESM builds etc. into account)
 
-### End
+#### TLDR
 
-TLDR, this package provides more flexibility and guarantee for Google Fonts
-loading, and is most suitable for package developers.
+This package provides more flexibility and control over Google Fonts loading,
+and is most suitable for package developers.
 
 ---
 
