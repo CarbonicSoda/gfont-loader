@@ -1,9 +1,8 @@
 <p align="center">
-	<!-- MO TODO dont forget to replace alt -->
-	<img src="https://raw.githubusercontent.com/CarbonicSoda//master/media/icon.png" width="100" alt="Icon">
+	<img src="https://raw.githubusercontent.com/CarbonicSoda/gfont-loader/master/media/icon.png" width="100" alt="GFont Loader Icon">
 </p>
-<h3 align="center"></h3>
-<p align="center"></p>
+<h3 align="center">GFont Loader</h3>
+<p align="center">How Google Fonts Loading in JS Should Be</p>
 
 ---
 
@@ -13,11 +12,81 @@ Install this package in your project:
 
 ```bash
 # via npm
-npm add
+npm add gfont-loader
 
 # or pnpm
-pnpm add
+pnpm add gfont-loader
 
 # or yarn
-yarn add
+yarn add gfont-loader
 ```
+
+Now to load fonts, call `loadGFont`:
+
+```ts
+// demo.ts
+
+import { loadGFont } from "gfont-loader";
+
+// either wait for font to load
+await loadGFont(...);
+
+// or not (recommended)
+loadGFont(...);
+```
+
+> The function will return a promise that will, upon load or error, resolve or
+> reject with a string message respectively.
+
+The function supports multiple formats:
+
+```ts
+// demo.ts
+
+// single family as string (default axis)
+loadGFont("Montserrat");
+
+// single family with specific axis
+loadGFont({
+	family: "Some Axis Font",
+	axis: {
+		// ital?: Italic, e.g. 0, 1, "0;1" etc.
+		// wdth?: Width, e.g. 75, "69;100", "62.5..80" etc.
+		// wght?: Weight, e.g. 300, "100;700", "200..800" etc.
+		// [axis]?: Any other axis of the font, in the same format
+	},
+});
+
+// multiple families
+loadGFont([...]); // same format as above (mixable) in array
+
+// only load fontface for specific characters
+loadGFont(..., opt: {
+	text: "Hello World!" // space etc. will auto become i.e. %20
+});
+
+// use load strategy other than "swap"
+loadGFont(..., opt: {
+	strat: "optional"
+})
+```
+
+### FAQ
+
+**Q**: Why not just use CSS @import etc. directly?  
+**A**: This is for packages that want to insert a Shadow DOM into someone else's
+pages etc.
+
+**Q**: Why not just use the official _webfontloader_?  
+**A**: Sir, that's from 8 years ago and obsolete. It is also way larger and can
+hardly be package shaked even if you're only importing from Google Fonts.
+
+### End
+
+TLDR, this package provides more flexibility and guarantee for Google Fonts
+loading, and is most suitable for package developers who want to insert Shadow
+DOMs into others' pages.
+
+---
+
+_&emsp;How can such packages not be updated for over 8 years...?_

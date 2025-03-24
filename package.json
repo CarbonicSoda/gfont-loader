@@ -1,14 +1,17 @@
 {
-	"name": "",
+	"name": "gfont-loader",
 	"author": "CarbonicSoda",
 	"version": "1.0.0",
-	"description": "",
+	"description": "How Google Fonts Loading in JS Should Be",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/CarbonicSoda/"
+		"url": "https://github.com/CarbonicSoda/gfont-loader"
 	},
-	"keywords": [],
+	"keywords": [
+		"google-font",
+		"load"
+	],
 	"type": "module",
 	"main": "dist/index.js",
 	"module": "dist/index.esm.js",
