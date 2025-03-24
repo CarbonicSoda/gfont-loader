@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://raw.githubusercontent.com/CarbonicSoda/gfont-loader/master/media/icon.png" width="100" alt="GFont Loader Icon">
+	<img src="https://raw.githubusercontent.com/CarbonicSoda/gfont-loader/master/media/icon.png" width="130" alt="GFont Loader Icon">
 </p>
 <h3 align="center">GFont Loader</h3>
 <p align="center">How Google Fonts Loading in JS Should Be</p>
@@ -25,7 +25,6 @@ Now to load fonts, call `loadGFont`:
 
 ```ts
 // demo.ts
-
 import { loadGFont } from "gfont-loader";
 
 // either wait for font to load
@@ -41,7 +40,7 @@ loadGFont(...);
 The function supports multiple formats:
 
 ```ts
-// demo.ts
+// load-fonts.ts
 
 // single family as string (default axis)
 loadGFont("Montserrat");
