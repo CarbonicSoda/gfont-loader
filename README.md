@@ -39,26 +39,40 @@ loadGFont(...);
 
 The function supports multiple formats:
 
-> All which have good TypeScript typing support.
+> All overloads have good TypeScript typing support.
 
 ```ts
 // load-fonts.ts
 
-// single family as string (default axis)
+// single family with default axis
 loadGFont("Montserrat");
 
 // single family with specific axis
 loadGFont({
-  family: "Some Font With Axis",
+  family: ...,
   axis: {
-    // ital?: Italic, e.g. 0, 1, "0;1" etc.
-    // wdth?: Width, e.g. 75, "69;100", "62.5..80" etc.
-    // wght?: Weight, e.g. 300, "100;700", "200..800" etc.
-    // [axis]: Any other axis of the font, in the same format
-  },
+    // ital?: italic, e.g. 0, 1, "0;1" etc.
+    // wdth?: width, e.g. 75, "69;100", "70;80..100" etc.
+    // wght?: weight, e.g. 300, "200..800", "120..200;300" etc.
+
+    // [axis]: any other axis of the font, in the same format
+
+    // in general, axis values can be one of:
+    // <number>: number (string is also accepted)
+    // <range>: `<number>..<number>`
+    // <tuple>: `(<number> | <range>)[;<tuple>]`
+    // *you must sort the numbers/ranges in tuples
+    // *tuple components must not overlap
+  }
 });
 
-// load multiple families
+// single family with multiple axis
+loadGFont({
+    family: ...,
+    axis: [...] // same format as above, number of axis specified must match
+});
+
+// multiple families
 loadGFont([...]); // same format as above (mixable) in array
 
 // only for specific characters
@@ -66,10 +80,10 @@ loadGFont(..., opt: {
   text: "Hello World!" // spaces etc. will be encoded automatically i.e. %20
 });
 
-// use load strategy other than "swap"
+// use loading strategy other than "swap"
 loadGFont(..., opt: {
-  strat: "optional"
-})
+  strat: "optional" // "auto" | "block" | "swap" | "fallback" | "optional"
+});
 ```
 
 ### FAQ
