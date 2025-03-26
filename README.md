@@ -49,11 +49,12 @@ loadGFont("Montserrat");
 
 // single family with specific axis
 loadGFont({
-  family: ...,
+  family: "Montserrat",
   axis: {
     // ital?: italic, e.g. 0, 1, "0;1" etc.
     // wdth?: width, e.g. 75, "69;100", "70;80..100" etc.
     // wght?: weight, e.g. 300, "200..800", "120..200;300" etc.
+    // these axis might not be supported by some fonts
 
     // [axis]: any other axis of the font, in the same format
 
@@ -68,7 +69,7 @@ loadGFont({
 
 // single family with multiple axis
 loadGFont({
-    family: ...,
+    family: "Montserrat",
     axis: [...] // same format as above, number of axis specified must match
 });
 
@@ -99,7 +100,7 @@ whilst providing enhanced flexibility and control.
 and can hardly be package shaked even if you're only importing from Google
 Fonts.  
 (13kB vs 0.8kB for the CJS build, npm shows 6+kB for gfont-loader took README,
-CJS + ESM builds etc. into account)
+CJS + ESM builds, DTS etc. into account)
 
 #### TLDR
 
