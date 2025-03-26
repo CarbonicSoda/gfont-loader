@@ -1,7 +1,7 @@
 {
 	"name": "gfont-loader",
 	"author": "CarbonicSoda",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "How Google Fonts Loading in JS Should Be",
 	"license": "MIT",
 	"repository": {
@@ -16,6 +16,11 @@
 	"main": "dist/index.js",
 	"module": "dist/index.esm.js",
 	"types": "dist/index.d.ts",
+	"exports": {
+		"types": "./dist/index.d.ts",
+		"import": "./dist/index.esm.js",
+		"default": "./dist/index.js"
+	},
 	"devDependencies": {
 		"@rollup/plugin-terser": "^0.4.4",
 		"rollup": "^4.35.0",
