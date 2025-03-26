@@ -97,10 +97,9 @@ whilst providing enhanced flexibility and control.
 
 **Q**: Why not just use the official _webfontloader_?  
 **A**: Sir, that's from 8 years ago and hella obsolete. It is also way larger
-and can hardly be package shaked even if you're only importing from Google
-Fonts.  
+and can hardly be tree-shaked even if you're only importing from Google Fonts.  
 (13kB vs 0.8kB for the CJS build, npm shows 6+kB for gfont-loader took README,
-CJS + ESM builds, DTS etc. into account)
+CJS + ESM builds, DTS and LICENSE etc. into account)
 
 #### TLDR
 
