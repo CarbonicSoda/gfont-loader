@@ -1,7 +1,7 @@
-<p align="center">
-	<img src="https://raw.githubusercontent.com/CarbonicSoda/gfont-loader/master/media/icon.png" width="130" alt="GFont Loader Icon">
-</p>
-<h3 align="center">GFont Loader</h3>
+<h3 align="center">
+  <img src="https://raw.githubusercontent.com/CarbonicSoda/gfont-loader/master/media/icon.png" width="130" alt="GFont Loader Icon" /><br />
+  GFont Loader
+</h3>
 <p align="center">How Google Fonts Loading in JS Should Be</p>
 
 ---
@@ -69,8 +69,8 @@ loadGFont({
 
 // single family with multiple axis
 loadGFont({
-    family: "Montserrat",
-    axis: [...] // same format as above, number of axis specified must match
+  family: "Montserrat",
+  axis: [...] // same format as above, number of axis specified must match
 });
 
 // multiple families
@@ -98,7 +98,7 @@ whilst providing enhanced flexibility and control.
 **Q**: Why not just use the official _webfontloader_?  
 **A**: Sir, that's from 8 years ago and hella obsolete. It is also way larger
 and can hardly be tree-shaked even if you're only importing from Google Fonts.  
-(13kB vs 0.8kB for the CJS build, npm shows 6+kB for gfont-loader took README,
+(13kB vs 0.8kB for the CJS build, npm shows 7+kB for gfont-loader took README,
 CJS + ESM builds, DTS and LICENSE etc. into account)
 
 #### TLDR
