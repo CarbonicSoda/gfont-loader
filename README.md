@@ -51,26 +51,21 @@ loadGFont("Montserrat");
 loadGFont({
   family: "Montserrat",
   axis: {
-    // ital?: italic, e.g. 0, 1, "0;1" etc.
-    // wdth?: width, e.g. 75, "69;100", "70;80..100" etc.
-    // wght?: weight, e.g. 300, "200..800", "120..200;300" etc.
+    // ital?: italic, e.g. 0, 1
+    // wdth?: width, e.g. 75, "80..100"
+    // wght?: weight, e.g. 300, "200..800"
     // these axis might not be supported by some fonts
 
-    // [axis]: any other axis of the font, in the same format
-
-    // in general, axis values can be one of:
+    // [axis]: any other axis of the font, in the same format: <number>|<range>
     // <number>: number (string is also accepted)
     // <range>: `<number>..<number>`
-    // <tuple>: `(<number> | <range>)[;<tuple>]`
-    // *you must sort the numbers/ranges in tuples
-    // *tuple components must not overlap
   }
 });
 
 // single family with multiple axis
 loadGFont({
   family: "Montserrat",
-  axis: [...] // same format as above, number of axis specified must match
+  axis: [...] // same format as above (number of axis specified must match)
 });
 
 // multiple families
@@ -90,21 +85,20 @@ loadGFont(..., opt: {
 ### FAQ
 
 **Q**: Why not just use CSS @import etc. directly?  
-**A**: This is for package developers that want to load fonts via J/TS, e.g. for
-a Shadow DOM injected into someone else's pages etc.  
-Also, this package utilizes preload to speed up loading and saves your work,
-whilst providing enhanced flexibility and control.
+**A**: This package utilizes preload to speed up loading and saves your work,
+whilst providing enhanced flexibility and control. Also for package developers
+that want to load fonts via J/TS, e.g. for a Shadow DOM injected into someone
+else's pages etc.
 
 **Q**: Why not just use the official _webfontloader_?  
-**A**: Sir, that's from 8 years ago and hella obsolete. It is also way larger
-and can hardly be tree-shaked even if you're only importing from Google Fonts.  
-(13kB vs 0.8kB for the CJS build, npm shows 7+kB for gfont-loader took README,
-CJS + ESM builds, DTS and LICENSE etc. into account)
+**A**: That's from 8 years ago and hella obsolete. It' is' also way larger and
+can hardly be tree-shaked even if you're only importing from Google Fonts.  
+(13kB vs 0.8kB for the CJS build, for example)
 
 #### TLDR
 
 This package provides more flexibility and control over Google Fonts loading,
-and is most suitable for package developers.
+and is also suitable for package developers.
 
 ---
 

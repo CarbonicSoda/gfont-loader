@@ -15,16 +15,20 @@ export function loadGFont<A extends FontAxis>(
 	const href = `https://fonts.googleapis.com/css2?${families
 		.map((family) => {
 			if (typeof family === "string") family = { family };
+
 			let spec = `family=${family.family.replaceAll(" ", "+")}`;
 			if (!family.axis || Object.keys(family.axis).length === 0) return spec;
 
-			const axes = (
-				Array.isArray(family.axis) ? family.axis : [family.axis]
-			).map((axis) =>
-				Object.fromEntries(
-					Object.entries(axis).sort(([axA], [axB]) => axA.localeCompare(axB)),
-				),
-			);
+			const axes = (Array.isArray(family.axis) ? family.axis : [family.axis])
+				.sort((axA, axB) =>
+					JSON.stringify(axA).localeCompare(JSON.stringify(axB)),
+				)
+				.map((axis) =>
+					Object.fromEntries(
+						Object.entries(axis).sort(([axA], [axB]) => axA.localeCompare(axB)),
+					),
+				);
+
 			return `${spec}:${Object.keys(axes[0]).join(",")}@${axes
 				.map((axis) => Object.values(axis).join(","))
 				.join(";")}`;
@@ -38,7 +42,7 @@ export function loadGFont<A extends FontAxis>(
 	loader.as = "style";
 	loader.href = href;
 
-	const promise = new Promise<string>((res, rej) => {
+	const loadPromise = new Promise<string>((res, rej) => {
 		loader.onload = () => {
 			loader.rel = "stylesheet";
 			res(`Loaded GFont from ${href}`);
@@ -50,5 +54,5 @@ export function loadGFont<A extends FontAxis>(
 	});
 
 	document.head.appendChild(loader);
-	return promise;
+	return loadPromise;
 }

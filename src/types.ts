@@ -1,9 +1,4 @@
-export type AxisValue =
-	| number
-	| `${number}`
-	| `${number}..${number}`
-	| `${number};${string}` // limited typing support due to ts
-	| `${number}..${number};${string}`; // limited typing support due to ts
+type AxisValue = number | `${number}` | `${number}..${number}`;
 
 export type FontAxis = {
 	ital?: AxisValue;
