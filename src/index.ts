@@ -1,5 +1,8 @@
 import { FontAxis, FontFamily, LoadStrat } from "./types";
 
+/**
+ * Refer to https://github.com/CarbonicSoda/gfont-loader/blob/master/README.md for usage.
+ */
 export function loadGFont<A extends FontAxis>(
 	family: FontFamily<A> | FontFamily<A>[],
 	opt?: {
