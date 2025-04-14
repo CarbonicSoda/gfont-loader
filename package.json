@@ -1,7 +1,7 @@
 {
 	"name": "gfont-loader",
 	"author": "CarbonicSoda",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "How Google Fonts Loading in JS Should Be",
 	"license": "MIT",
 	"repository": {
@@ -31,7 +31,8 @@
 	},
 	"scripts": {
 		"build": "rollup -c",
-		"watch": "rollup -c --watch"
+		"watch": "rollup -c --watch",
+		"prepublish": "rollup -c"
 	},
 	"publishConfig": {
 		"access": "public"

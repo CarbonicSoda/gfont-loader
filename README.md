@@ -25,7 +25,11 @@ To load fonts, call `loadGFont()`:
 
 ```ts
 // demo.ts
-import { loadGFont } from "gfont-loader";
+import { loadGFont, preconnect } from "gfont-loader";
+
+// preconnect to Google Fonts
+// use w.r.t Lighthouse performance reports
+preconnect();
 
 // either wait for font to load
 await loadGFont(...);
@@ -93,7 +97,7 @@ else's pages etc.
 **Q**: Why not just use the official _webfontloader_?  
 **A**: That's from 8 years ago and hella obsolete. It' is' also way larger and
 can hardly be tree-shaked even if you're only importing from Google Fonts.  
-(13kB vs 0.8kB for the CJS build, for example)
+(13kB vs 0.8kB for the CJS build v1.1, for example)
 
 #### TLDR
 

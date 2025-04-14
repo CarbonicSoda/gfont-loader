@@ -1,7 +1,23 @@
 import { FontAxis, FontFamily, LoadStrat } from "./types";
 
 /**
- * Refer to https://github.com/CarbonicSoda/gfont-loader/blob/master/README.md for usage.
+ * Preconnect to Google Fonts, use w.r.t. Lighthouse performance reports
+ */
+export function preconnect(): void {
+	const gApi = document.createElement("link");
+	gApi.rel = "preconnect";
+	gApi.href = "https://fonts.googleapis.com";
+
+	const gStatic = document.createElement("link");
+	gStatic.rel = "preconnect";
+	gStatic.href = "https://fonts.gstatic.com";
+	gStatic.crossOrigin = "";
+
+	document.head.append(gApi, gStatic);
+}
+
+/**
+ * Refer to https://github.com/CarbonicSoda/gfont-loader/blob/master/README.md for usage
  */
 export function loadGFont<A extends FontAxis>(
 	family: FontFamily<A> | FontFamily<A>[],
