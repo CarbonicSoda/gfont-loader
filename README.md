@@ -66,6 +66,9 @@ await loadGFont(..., {
 });
 ```
 
+> If there's no reasons to wait for the font to resolve, use `void loadGFont(...)` instead of
+> `await loadGFont(...)`.
+
 ### FAQ
 
 **Q**: Why not just use CSS @import etc. directly?
