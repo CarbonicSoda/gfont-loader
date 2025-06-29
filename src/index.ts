@@ -1,74 +1,61 @@
 import { FontAxis, FontFamily, LoadStrat } from "./types";
 
 /**
- * Preconnect to Google Fonts, use w.r.t. Lighthouse performance reports
- */
-export function preconnect(): void {
-	const gApi = document.createElement("link");
-	gApi.rel = "preconnect";
-	gApi.href = "https://fonts.googleapis.com";
-
-	const gStatic = document.createElement("link");
-	gStatic.rel = "preconnect";
-	gStatic.href = "https://fonts.gstatic.com";
-	gStatic.crossOrigin = "";
-
-	document.head.append(gApi, gStatic);
-}
-
-/**
- * Refer to https://github.com/CarbonicSoda/gfont-loader/blob/master/README.md for usage
+ * Refer to https://github.com/CarbonicSoda/gfont-loader/blob/master/README.md for usage.
  */
 export function loadGFont<A extends FontAxis>(
 	family: FontFamily<A> | FontFamily<A>[],
-	opt?: {
-		text?: string;
-		strat?: LoadStrat;
-	},
-): Promise<string> {
+	options?: { text?: string; strat?: LoadStrat },
+): Promise<void> {
 	const families = Array.isArray(family) ? family : [family];
 
-	const href = `https://fonts.googleapis.com/css2?${families
-		.map((family) => {
-			if (typeof family === "string") family = { family };
-
-			let spec = `family=${family.family.replaceAll(" ", "+")}`;
-			if (!family.axis || Object.keys(family.axis).length === 0) return spec;
-
-			const axes = (Array.isArray(family.axis) ? family.axis : [family.axis])
-				.sort((axA, axB) =>
-					JSON.stringify(axA).localeCompare(JSON.stringify(axB)),
-				)
-				.map((axis) =>
-					Object.fromEntries(
-						Object.entries(axis).sort(([axA], [axB]) => axA.localeCompare(axB)),
-					),
-				);
-
-			return `${spec}:${Object.keys(axes[0]).join(",")}@${axes
-				.map((axis) => Object.values(axis).join(","))
-				.join(";")}`;
-		})
-		.join("&")}${
-		opt?.text ? `&text=${encodeURIComponent(opt?.text)}` : ""
-	}&display=${opt?.strat ?? "swap"}`;
+	const href = `https://fonts.googleapis.com/css2?${families.map(getFamilyQuery).join("&")}${
+		options?.text ? `&text=${encodeURIComponent(options.text)}` : ""
+	}&display=${options?.strat ?? "swap"}`;
 
 	const loader = document.createElement("link");
 	loader.rel = "preload";
 	loader.as = "style";
 	loader.href = href;
 
-	const loadPromise = new Promise<string>((res, rej) => {
+	const loadPromise = new Promise<void>((res, rej) => {
 		loader.onload = () => {
 			loader.rel = "stylesheet";
-			res(`Loaded GFont from ${href}`);
+			res();
 		};
 		loader.onerror = () => {
 			loader.remove();
-			rej(`Failed to load GFont from ${href}`);
+			rej(new Error(`failed to load gfont from ${href}`));
 		};
 	});
 
 	document.head.appendChild(loader);
+
 	return loadPromise;
+}
+
+function getFamilyQuery<A extends FontAxis>(family: FontFamily<A>): string {
+	if (typeof family === "string") {
+		family = { family };
+	}
+
+	const spec = `family=${family.family.replaceAll(" ", "+")}`;
+
+	if (!family.axis || Object.keys(family.axis).length === 0) {
+		return spec;
+	}
+
+	const axis = Array.isArray(family.axis) ? family.axis : [family.axis];
+
+	const axes = axis
+		.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)))
+		.map((a) => {
+			return Object.fromEntries(
+				Object.entries(a).sort(([a], [b]) => a.localeCompare(b)),
+			);
+		});
+
+	return `${spec}:${Object.keys(axes[0]).join(",")}@${axes
+		.map((axis) => Object.values(axis).join(","))
+		.join(";")}`;
 }

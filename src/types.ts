@@ -1,17 +1,15 @@
-type AxisValue = number | `${number}` | `${number}..${number}`;
+export type FontAxisValue = number | `${number}` | `${number}..${number}`;
 
-export type FontAxis = {
-	ital?: AxisValue;
-	wdth?: AxisValue;
-	wght?: AxisValue;
-	[axis: symbol]: AxisValue;
-};
+export interface FontAxis {
+	ital?: FontAxisValue;
+	wdth?: FontAxisValue;
+	wght?: FontAxisValue;
+
+	[axis: string]: FontAxisValue | undefined;
+}
 
 export type FontFamily<A extends FontAxis> =
 	| string
-	| {
-			family: string;
-			axis?: FontAxis | [A, ...Record<keyof A, AxisValue>[]];
-	  };
+	| { family: string; axis?: FontAxis | [A, ...Record<keyof A, FontAxisValue>[]] };
 
 export type LoadStrat = "auto" | "block" | "swap" | "fallback" | "optional";
